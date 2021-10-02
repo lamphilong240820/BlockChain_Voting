@@ -1,0 +1,11 @@
+# dependencies
+node_modules
+
+# testing
+.next
+
+# truffle
+build
+
+# environment variables
+.env
