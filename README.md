@@ -1,84 +1,84 @@
-# BlockChainVoting
+# Hệ thống bầu cử dựa trên nền tảng Blockchain
 
-A blockchain-based E-voting system, created as the final year project of Shri Bhagubhai Mafatlal Polytechnic. Teammates include me, Sayyam Gada and Charmee Mehta.
-> The application is MIT-Licensed.
+Một hệ thống bỏ phiếu điện tử dựa trên blockchain, được tạo ra như là dự án năm cuối của trường Đại học Bách khoa Shri Bhagubhai Mafatlal. Đồng đội bao gồm tôi, Sayyam Gada và Charmee Mehta.
 
-## Build Setup
+
+## Chạy ứng dụng
 
 ```bash
-# install dependencies
+# Cài đặt các gói
 npm install
 
-# serve with hot reload at localhost:3000
+# Chạy server
 npm start
 ```
 
-Create your own <b>.env</b> file and the file should contain:
+Tạo file <b>.env</b> trong thư mục chính với nội dung sau:
 ```bash
 EMAIL=YOUR_EMAIL_ID
 PASSWORD=YOUR_PASSWORD_FOR_EMAIL_ID
 ```
-Install MetaMask extension (https://metamask.io/download.html) and make sure to have some Ether to test the application locally. Ether can be fetched from Rinkeby Faucet (https://faucet.rinkeby.io)
+Cài đặt tiện ích MetaMask trên Chrome (https://metamask.io/download.html) à đảm bảo có một số Ether để kiểm tra ứng dụng cục bộ. Ether có thể được tìm nạp từ Rinkeby Faucet (https://faucet.rinkeby.io)
 
-#### Note:
-- Make sure to install Node.js v11.14.0 to make sure the app runs fine. Testing for other node versions is yet to be done.
-- MongoDB must be working in background on localhost:27017
+#### Chú ý:
+- Đảm bảo cài đặt Node.js v11.14.0 để đảm bảo ứng dụng chạy tốt. Việc kiểm tra các phiên bản nút khác vẫn chưa được thực hiện.
+- MongoDB phải hoạt động ở chế độ nền trên localhost: 27017
 
-###### Please star the repo if it helped you in any way!
+###### Hãy gắn dấu sao repo nếu dự án này giúp bạn theo bất kỳ cách nào!
 
-## Tech Stack:
+## Các công nghệ sử dụng:
 
-- Solidity/Web3 (for writing/connecting the Blockchain contract)
+- Solidity/Web3 (để viết / kết nối hợp đồng Blockchain)
 - Next.js & Semantic UI React (front-end)
 - MongoDB/ExpressJS/Node.js (back-end)
-- IPFS (file storage for images)
+- IPFS (lưu trữ tệp cho hình ảnh)
 
-## Screenshots of the app:
+## Ảnh chụp màn hình của ứng dụng:
 
-Homepage of the application:
+Trang chủ của ứng dụng:
 
 ![](screenshots/homepage.PNG)
 
-Company registers/logs in:
+Cơ quan đăng ký / đăng nhập:
 
 ![](screenshots/company_login.PNG)
 
-Company creates an election if not created:
+Cơ quan tạo một cuộc bầu cử nếu không được tạo:
 
 ![](screenshots/create_election.PNG)
 
-Dashboard on successful election creation:
+Trang chủ về tạo cuộc bầu cử thành công:
 
 ![](screenshots/dashboard.PNG)
 
-List of candidates for the election (here, you can add candidates):
+Danh sách các ứng cử viên cho cuộc bầu cử (tại đây, bạn có thể thêm các ứng cử viên):
 
 ![](screenshots/candidate_list.PNG)
 
-Candidate has been notified on the mail:
+Ứng viên đã được thông báo trên thư:
 
 ![](screenshots/candidate_registeration_mail.PNG)
 
-List of voters for the election (here, you can add voters):
+Danh sách cử tri cho cuộc bầu cử (tại đây, bạn có thể thêm cử tri):
 
 ![](screenshots/voterlist.PNG)
 
-Voters have been sent their secure usernames and passwords on the mail:
+Cử tri đã được gửi tên người dùng và mật khẩu an toàn của họ qua thư:
 
 ![](screenshots/voter_registeration_mail.PNG)
 
-Voter login page:
+Trang đăng nhập dành cho cử tri:
 
 ![](screenshots/voter_login.PNG)
 
-Successful voting scenario:
+Kịch bản bỏ phiếu thành công:
 
 ![](screenshots/successful_voting.PNG)
 
-Unsuccessful voting scenario:
+Kịch bản bỏ phiếu không thành công:
 
 ![](screenshots/unsuccessful_voting.PNG)
 
-Notification to each candidate and voter for the winner of candidates:
+Thông báo cho từng ứng cử viên và cử tri về ứng cử viên chiến thắng cuộc bầu cử:
 
 ![](screenshots/winner_candidate_mail.PNG)
