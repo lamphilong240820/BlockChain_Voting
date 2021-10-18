@@ -118,6 +118,9 @@ class VotingList extends Component {
     };
     
     onSubmit = async (event) => {
+        let status= Cookies.get('status');
+        if( status != "false") {
+        
         event.preventDefault();
         this.setState({loading: true});
         const accounts = await web3.eth.getAccounts();
@@ -162,18 +165,22 @@ class VotingList extends Component {
             };
             http.send(params);
             this.setState({loading: false});
+          }
+          else{
+            alert("Cuộc bầu cử đã kết thúc, không thể thêm thông tin ứng viên mới ");
+          }
     };
     
     GridExampleGrid = () => <Grid>{columns}</Grid>
     SidebarExampleVisible = () => (
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin' style={{ backgroundColor: 'white', borderWidth: "10px" }}>
-          <Menu.Item as='a' style={{ color: 'grey' }} >
+          <Menu.Item as='a' style={{ color: '#8B4513' }} >
           <h2>MENU</h2><hr/>
           </Menu.Item>      
           <Link route={`/election/${Cookies.get('address')}/company_dashboard`}>
           <a>
-            <Menu.Item style={{ color: 'grey' }}>
+            <Menu.Item style={{ color: '#8B4513' }}>
               <Icon name='dashboard'/>
               Trang chủ
             </Menu.Item>
@@ -181,7 +188,7 @@ class VotingList extends Component {
             </Link>
             <Link route={`/election/${Cookies.get('address')}/candidate_list`}>
             <a>
-            <Menu.Item as='a' style={{ color: 'grey' }}>
+            <Menu.Item as='a' style={{ color: '#8B4513' }}>
               <Icon name='user outline' />
               Danh sách ứng viên
             </Menu.Item>
@@ -189,7 +196,7 @@ class VotingList extends Component {
             </Link>
             <Link route={`/election/${Cookies.get('address')}/voting_list`}>
             <a>
-            <Menu.Item as='a' style={{ color: 'grey' }}>
+            <Menu.Item as='a' style={{ color: '#8B4513' }}>
               <Icon name='list' />
               Danh sách cử tri
             </Menu.Item>
@@ -197,7 +204,7 @@ class VotingList extends Component {
             </Link>
             <hr/>
             <Button onClick={this.signOut} style={{backgroundColor: 'white'}}>
-            <Menu.Item as='a' style={{ color: 'grey' }}>
+            <Menu.Item as='a' style={{ color: '#8B4513' }}>
               <Icon name='sign out' />
               Đăng xuất
             </Menu.Item>       

@@ -11,6 +11,10 @@ const CompanySchema = new Schema({
     password: {                         //password of the company
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 });
 // hash user password before saving into database

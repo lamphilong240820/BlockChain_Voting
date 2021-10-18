@@ -114,10 +114,12 @@ class VotingList extends Component {
         const b = this.state.election_name;
         const c = this.state.election_description;
         //further proceed
-
+        const election_address=Cookies.get('address');
+        // alert(election_address);
         var http = new XMLHttpRequest();
-        var url = '/voter/'+d;  
-        var params = 'email='+a+'&election_name='+b+'&election_description='+c;
+        var url = '/voter/'+d;
+        // alert(url);
+        var params = 'email='+a+'&election_name='+b+'&election_description='+c+'&election_address='+election_address;
         http.open("PUT", url, true);
         //Send the proper header information along with the request
         http.setRequestHeader(
@@ -172,7 +174,7 @@ class VotingList extends Component {
         </Menu.Item>      
         <Link route={`/election/${Cookies.get('address')}/company_dashboard`}>
         <a>
-          <Menu.Item style={{ color: 'grey', fontColor: 'grey' }}>
+          <Menu.Item style={{ color: '#8B4513', fontColor: 'grey' }}>
             <Icon name='dashboard'/>
             Trang chủ
           </Menu.Item>
@@ -180,7 +182,7 @@ class VotingList extends Component {
           </Link>
           <Link route={`/election/${Cookies.get('address')}/candidate_list`}>
           <a>
-          <Menu.Item as='a' style={{ color: 'grey' }}>
+          <Menu.Item as='a' style={{ color: '#8B4513' }}>
             <Icon name='user outline' />
             Danh sách ứng viên
           </Menu.Item>
@@ -188,7 +190,7 @@ class VotingList extends Component {
           </Link>
           <Link route={`/election/${Cookies.get('address')}/voting_list`}>
           <a>
-          <Menu.Item as='a' style={{ color: 'grey' }}>
+          <Menu.Item as='a' style={{ color: '#8B4513' }}>
             <Icon name='list' />
             Danh sách cử tri
           </Menu.Item>
@@ -196,7 +198,7 @@ class VotingList extends Component {
           </Link>
           <hr/>
           <Button onClick={this.signOut} style={{backgroundColor: 'white'}}>
-          <Menu.Item as='a' style={{ color: 'grey' }}>
+          <Menu.Item as='a' style={{ color: '#8B4513' }}>
             <Icon name='sign out' />
             Đăng xuất
           </Menu.Item>       
@@ -209,10 +211,13 @@ class VotingList extends Component {
         Cookies.remove('company_email');
         Cookies.remove('company_id');
         alert("Đang đăng xuất.");
-        Router.pushRoute('/homepage');
+        Router.pushRoute('/company_login');
     }
 
     register = event => {
+    let status= Cookies.get('status');
+    if( status != "false") {
+
 
 		const email = document.getElementById('register_voter_email').value;
     
@@ -238,6 +243,10 @@ class VotingList extends Component {
             }
         };
     	http.send(params);
+    }
+    else{
+      alert("Cuộc bầu cử đã kết thúc, không thể thêm thông tin cử tri mới ");
+    }
 	}
 	
   render() {      

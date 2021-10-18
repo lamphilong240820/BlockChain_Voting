@@ -130,11 +130,12 @@ module.exports = {
 	},
 
 	updateById: function (req, res, cb) {
-		VoterModel.findOne({ email: req.body.email }, function (err, result) {
+		VoterModel.findOne({ email: req.body.email, _id:req.params.voterId }, function (err, result) {
 			if (err) {
 				cb(err);
 			} else {
 				console.log('email:' + req.body.email);
+				console.log('election_address:' + req.body.election_address);
 				console.log('findOne:' + result);
 				if (!result) {
 					password = bcrypt.hashSync(req.body.email, saltRounds);

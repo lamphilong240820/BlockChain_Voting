@@ -146,33 +146,34 @@ const HomepageLayout = () => (
 				<Grid.Row textAlign="center">
 					<Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
 						<Header as="h3" style={{ fontSize: '2em' }}>
-							Private
+							Riêng tư
 						</Header>
 						<p style={{ fontSize: '1.33em' }}>
-							Doesn't give any information <br />
-							regarding personal data.
+						Không cung cấp bất kỳ thông tin nào <br />
+						liên quan đến dữ liệu cá nhân.
 						</p>
 						<Header as="h3" style={{ fontSize: '2em' }}>
-							Secure
+						 Không có thời gian chết
 						</Header>
 						<p style={{ fontSize: '1.33em' }}>
-							Not even a single chance of shutting <br /> down of the system.
+						Ứng dụng được triển khai trên blockchain<br />luôn sẵn sàng phục vụ các ngừoi dùng.
 						</p>
 					</Grid.Column>
 					<Image src="../static/ether2.png" width="216" height="256" style={{ paddingTop: '50px' }} />
 
 					<Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
 						<Header as="h3" style={{ fontSize: '2em' }}>
-							Decentralized
+						Phi tập trung
 						</Header>
 						<p style={{ fontSize: '1.33em' }}>
-							Decentralized technology gives you the <br /> power to store your assets in a network.
+						Công nghệ phi tập trung cung cấp cho bạn<br />
+						sức mạnh để lưu trữ tài sản của bạn trong một mạng lưới.
 						</p>
 						<Header as="h3" style={{ fontSize: '2em' }}>
-							Immutable
+							Tính bất biến
 						</Header>
 						<p style={{ fontSize: '1.33em' }}>
-							Keeps its ledgers in a never-ending <br /> state of forwarding momentum.
+							Các tác nhân xấu không thể sửa đổi hoặc làm sai lệch<br /> dữ liệu và giao dịch đã được lưu trên Blockchain.
 						</p>
 					</Grid.Column>
 				</Grid.Row>

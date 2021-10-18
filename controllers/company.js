@@ -9,7 +9,7 @@ module.exports = {
             }
             else{
                 if(!result){
-                    CompanyModel.create({ email: req.body.email, password: req.body.password }, function (err, result) {
+                    CompanyModel.create({ email: req.body.email, password: req.body.password, status: "true" }, function (err, result) {
                         if (err) 
                             cb(err);
                         else{
@@ -41,6 +41,32 @@ module.exports = {
                 }
                 else {
                     res.json({status:"error", message: "Email hoặc mật khẩu không chính xác, vui lòng thử lại!!!", data:null});
+                }
+            }
+        });
+    },
+    endelection: function(req, res, cb) {
+        CompanyModel.findOne({email:req.body.email, status : "true"} , function(err, CompanyInfo){
+            if (err) 
+                cb(err);
+            else {
+                if(CompanyInfo){
+                    CompanyModel.updateOne({email:req.body.email}, {$set: {status : "false"}},function (err, result) {
+                        if (err) 
+                            cb(err);
+                        else{
+                            CompanyModel.findOne({email:req.body.email, status : "false"}  , function(err, CompanyInfo) {
+                                if (err)
+                                    cb(err);
+                                else{
+                                     res.json({status:"success", message: "Cuộc bầu cử vừa kết thúc!!!", data:{id: CompanyInfo._id, email: CompanyInfo.email, status: CompanyInfo.status}});
+                                }
+                            });  
+                        };                 
+                    });
+                }
+                else {
+                    res.json({status:"error", message: "Có lỗi xảy ra, cuộc bầu cử đã kết thúc!!!", data:{status: false}});
                 }
             }
         });

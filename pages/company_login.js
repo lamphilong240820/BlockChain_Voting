@@ -35,7 +35,7 @@ class DividerExampleVerticalForm extends Component {
     const password = document.getElementById('signup_password').value;
     const repeat_password = document.getElementById('signup_repeat_password').value;
     if(password!=repeat_password){
-        alert("Passwords do not match");        
+        alert("Mật khẩu không trùng khớp");        
     }
     else {
     var http = new XMLHttpRequest();
@@ -49,7 +49,7 @@ class DividerExampleVerticalForm extends Component {
             var responseObj = JSON.parse(http.responseText)
             if(responseObj.status=="success") {                                     
                     Cookies.set('company_email', encodeURI(responseObj.data.email));                                                        
-                    alert("Added!");
+                    alert("Đăng ký thành công");
                     Router.pushRoute(`/company_login`);
             }
             else {
@@ -84,6 +84,7 @@ class DividerExampleVerticalForm extends Component {
           }
           else {
             alert(responseObj.message);
+			      Router.pushRoute('/company_login');
           }
           
         }

@@ -103,7 +103,7 @@ class ContainerExampleContainer extends Component {
 			this.returnGraph();
 		} catch (err) {
 			console.log(err.message);
-			alert('Redirecting you to login page...');
+			alert('Đang chuyển hướng về trang đăng nhập');
 			Router.pushRoute('/company_login');
 		}
 		this.setState({ b: b });
@@ -138,13 +138,13 @@ class ContainerExampleContainer extends Component {
 				width="thin"
 				style={{ backgroundColor: 'white', borderWidth: '10px' }}
 			>
-				<Menu.Item as="a" style={{ color: 'grey' }}>
+				<Menu.Item as="a" style={{ color: '#8B4513' }}>
 					<h2>MENU</h2>
 					<hr />
 				</Menu.Item>
 				<Link route={`/election/${Cookies.get('address')}/company_dashboard`}>
 					<a>
-						<Menu.Item style={{ color: 'grey', fontColor: 'grey' }}>
+						<Menu.Item style={{ color: '#8B4513', fontColor: '#8B4513' }}>
 							<Icon name="dashboard" />
 							Trang chủ
 						</Menu.Item>
@@ -152,7 +152,7 @@ class ContainerExampleContainer extends Component {
 				</Link>
 				<Link route={`/election/${Cookies.get('address')}/candidate_list`}>
 					<a>
-						<Menu.Item as="a" style={{ color: 'grey' }}>
+						<Menu.Item as="a" style={{ color: '#8B4513' }}>
 							<Icon name="user outline" />
 							Danh sách ứng viên
 						</Menu.Item>
@@ -160,7 +160,7 @@ class ContainerExampleContainer extends Component {
 				</Link>
 				<Link route={`/election/${Cookies.get('address')}/voting_list`}>
 					<a>
-						<Menu.Item as="a" style={{ color: 'grey' }}>
+						<Menu.Item as="a" style={{ color: '#8B4513' }}>
 							<Icon name="list" />
 							Danh sách cử tri
 						</Menu.Item>
@@ -168,7 +168,7 @@ class ContainerExampleContainer extends Component {
 				</Link>
 				<hr />
 				<Button onClick={this.signOut} style={{ backgroundColor: 'white' }}>
-					<Menu.Item as="a" style={{ color: 'grey' }}>
+					<Menu.Item as="a" style={{ color: '#8B4513' }}>
 						<Icon name="sign out" />
 						Đăng xuất
 					</Menu.Item>
@@ -180,10 +180,52 @@ class ContainerExampleContainer extends Component {
 		Cookies.remove('address');
 		Cookies.remove('company_email');
 		Cookies.remove('company_id');
-		alert('Logging out.');
+		alert('Đang đăng xuất...');
 		Router.pushRoute('/homepage');
 	}
 	endElection = async event => {
+		let status= "true";
+		const email=Cookies.get('company_email');
+		// alert(email);
+		var http = new XMLHttpRequest();
+    	var url = "/company/endelection";
+		var params = 'email='+email;
+    	http.open('POST', url, true);
+		// alert(email);
+
+    	//Send the proper header information along with the request
+		http.setRequestHeader(
+			"Content-type",
+			"application/x-www-form-urlencoded"
+		  );
+
+		
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+
+        if(http.readyState == 4 && http.status == 200) {
+
+            var responseObj = JSON.parse(http.responseText)
+            if(responseObj.status=="success") {  
+				// alert(responseObj.data.email);  
+				Cookies.set('status', 'false');					
+                alert(responseObj.message); 
+            }
+            else {
+				Cookies.set('status', 'false');	
+                alert(responseObj.message);
+            }
+        }
+		};		
+		http.send(params);
+		status= Cookies.get('status');
+		if (status == undefined) status ="true";
+
+		// alert(status);
+		if(status == "true"){
+		// alert("test");
+		Cookies.set('status', 'false');		
+		status= Cookies.get('status');
 		// let candidate = 0;
 		try {
 			this.setState({ loading: true });
@@ -240,6 +282,7 @@ class ContainerExampleContainer extends Component {
 		} catch (err) {
 			console.log(err.message);
 		}
+	}
 	};
 
 	returnModal = () => <h1>I won the election</h1>;
