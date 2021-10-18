@@ -1,6 +1,4 @@
-# Hệ thống bầu cử dựa trên nền tảng Blockchain
-
-Một hệ thống bỏ phiếu điện tử dựa trên blockchain, được tạo ra như là dự án năm cuối của trường Đại học Bách khoa Shri Bhagubhai Mafatlal. Đồng đội bao gồm tôi, Sayyam Gada và Charmee Mehta.
+# Hệ thống bầu cử dựa trên nền tảng Blockchain - Niên luận ngành
 
 
 ## Chạy ứng dụng
