@@ -170,7 +170,7 @@ const HomepageLayout = () => (
 						sức mạnh để lưu trữ tài sản của bạn trong một mạng lưới.
 						</p>
 						<Header as="h3" style={{ fontSize: '2em' }}>
-							Tính bất biến
+							Bất biến
 						</Header>
 						<p style={{ fontSize: '1.33em' }}>
 							Các tác nhân xấu không thể sửa đổi hoặc làm sai lệch<br /> dữ liệu và giao dịch đã được lưu trên Blockchain.

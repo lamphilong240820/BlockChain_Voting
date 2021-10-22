@@ -44,8 +44,8 @@ const data = {
 	datasets: [
 		{
 			label: 'Thống kê phiếu bầu',
-			backgroundColor: 'rgba(255,99,132,0.2)',
-			borderColor: 'rgba(255,99,132,1)',
+			backgroundColor: 'rgb(98, 126, 234)',
+			borderColor: 'rgb(98, 126, 234)',
 			borderWidth: 2,
 			hoverBackgroundColor: 'rgba(255,99,132,0.4)',
 			hoverBorderColor: 'rgba(255,99,132,1)',
@@ -113,7 +113,7 @@ class ContainerExampleContainer extends Component {
 		const { election_name, election_desc } = this.state;
 
 		return (
-			<div style={{ marginLeft: '43%', marginBottom: '2%', marginTop: '2%', float: 'left' }}>
+			<div style={{ marginLeft: '30%', marginBottom: '2%', marginTop: '2%', float: 'left' }}>
 				<Header as="h2">
 					<Icon name="address card" />
 					<Header.Content>
@@ -138,13 +138,13 @@ class ContainerExampleContainer extends Component {
 				width="thin"
 				style={{ backgroundColor: 'white', borderWidth: '10px' }}
 			>
-				<Menu.Item as="a" style={{ color: '#8B4513' }}>
+				<Menu.Item as="a" style={{ color: 'rgb(98, 126, 234)' }}>
 					<h2>MENU</h2>
 					<hr />
 				</Menu.Item>
 				<Link route={`/election/${Cookies.get('address')}/company_dashboard`}>
 					<a>
-						<Menu.Item style={{ color: '#8B4513', fontColor: '#8B4513' }}>
+						<Menu.Item style={{ color: 'rgb(98, 126, 234)', fontColor: '#8B4513' }}>
 							<Icon name="dashboard" />
 							Trang chủ
 						</Menu.Item>
@@ -152,7 +152,7 @@ class ContainerExampleContainer extends Component {
 				</Link>
 				<Link route={`/election/${Cookies.get('address')}/candidate_list`}>
 					<a>
-						<Menu.Item as="a" style={{ color: '#8B4513' }}>
+						<Menu.Item as="a" style={{ color: 'rgb(98, 126, 234)' }}>
 							<Icon name="user outline" />
 							Danh sách ứng viên
 						</Menu.Item>
@@ -160,7 +160,7 @@ class ContainerExampleContainer extends Component {
 				</Link>
 				<Link route={`/election/${Cookies.get('address')}/voting_list`}>
 					<a>
-						<Menu.Item as="a" style={{ color: '#8B4513' }}>
+						<Menu.Item as="a" style={{ color: 'rgb(98, 126, 234)' }}>
 							<Icon name="list" />
 							Danh sách cử tri
 						</Menu.Item>
@@ -168,7 +168,7 @@ class ContainerExampleContainer extends Component {
 				</Link>
 				<hr />
 				<Button onClick={this.signOut} style={{ backgroundColor: 'white' }}>
-					<Menu.Item as="a" style={{ color: '#8B4513' }}>
+					<Menu.Item as="a" style={{ color: 'rgb(98, 126, 234)' }}>
 						<Icon name="sign out" />
 						Đăng xuất
 					</Menu.Item>
@@ -312,9 +312,10 @@ class ContainerExampleContainer extends Component {
 									Kết thúc
 								</Button>
 								<Step.Group style={{ minWidth: 1130, minHeight: 90 }}>
-									<Step icon="users" title="Cử tri" description={this.state.b} />
-									<Step icon="user outline" title="Ứng cử viên" description={this.state.candidates} />
+									<Step icon="users" style={{color: 'rgb(98, 126, 234)'}} title="Cử tri" description={this.state.b} />
+									<Step icon="user outline" style={{color: 'rgb(98, 126, 234)'}} title="Ứng cử viên" description={this.state.candidates} />
 									<Step
+										style={{color: 'rgb(98, 126, 234)'}}
 										icon="chart bar outline"
 										title="Tổng số phiếu bầu"
 										description={this.state.voters}

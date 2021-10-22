@@ -40,7 +40,7 @@ module.exports = {
                     res.json({status:"success", message: "company found!!!", data:{id: CompanyInfo._id, email: CompanyInfo.email}});
                 }
                 else {
-                    res.json({status:"error", message: "Email hoặc mật khẩu không chính xác, vui lòng thử lại!!!", data:null});
+                    res.json({status:"error", message: "Email hoặc mật khẩu không đúng, vui lòng thử lại!!!", data:null});
                 }
             }
         });

@@ -85,7 +85,7 @@ class VotingList extends Component {
         } = this.state;
     
         return (
-          <div style={{marginLeft: '45%',marginBottom: '2%',marginTop: '2%'}}>
+          <div style={{marginLeft: '30%',marginBottom: '2%',marginTop: '2%'}}>
             <Header as="h2">
               <Icon name="address card" />
               <Header.Content>
@@ -175,12 +175,12 @@ class VotingList extends Component {
     SidebarExampleVisible = () => (
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin' style={{ backgroundColor: 'white', borderWidth: "10px" }}>
-          <Menu.Item as='a' style={{ color: '#8B4513' }} >
+          <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
           <h2>MENU</h2><hr/>
           </Menu.Item>      
           <Link route={`/election/${Cookies.get('address')}/company_dashboard`}>
           <a>
-            <Menu.Item style={{ color: '#8B4513' }}>
+            <Menu.Item style={{ color: 'rgb(98, 126, 234)' }}>
               <Icon name='dashboard'/>
               Trang chủ
             </Menu.Item>
@@ -188,7 +188,7 @@ class VotingList extends Component {
             </Link>
             <Link route={`/election/${Cookies.get('address')}/candidate_list`}>
             <a>
-            <Menu.Item as='a' style={{ color: '#8B4513' }}>
+            <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
               <Icon name='user outline' />
               Danh sách ứng viên
             </Menu.Item>
@@ -196,7 +196,7 @@ class VotingList extends Component {
             </Link>
             <Link route={`/election/${Cookies.get('address')}/voting_list`}>
             <a>
-            <Menu.Item as='a' style={{ color: '#8B4513' }}>
+            <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
               <Icon name='list' />
               Danh sách cử tri
             </Menu.Item>
@@ -204,7 +204,7 @@ class VotingList extends Component {
             </Link>
             <hr/>
             <Button onClick={this.signOut} style={{backgroundColor: 'white'}}>
-            <Menu.Item as='a' style={{ color: '#8B4513' }}>
+            <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
               <Icon name='sign out' />
               Đăng xuất
             </Menu.Item>       
@@ -225,8 +225,8 @@ class VotingList extends Component {
       // const {Body, Row, HeaderCell, Header} = Table;
     return (
       <div>
-          <Helmet>
-            <title>Danh sách ứng viên!</title>
+          <Helmet >
+            <title >Danh sách ứng viên!</title>
             <link rel="shortcut icon" type="image/x-icon" href="../../static/logo3.png" />
           </Helmet>
         <Grid>
@@ -240,7 +240,7 @@ class VotingList extends Component {
               <br />
               <Grid.Column width={14} style={{ minHeight: '630px' }}>
                 <Grid.Column style={{ float: 'left', width: '60%' }}>
-                  <Header as='h2' color='black'>
+                  <Header as='h2' color= 'blue'>
                   Danh sách ứng viên
               </Header>
                   <Container>                      
@@ -254,21 +254,22 @@ class VotingList extends Component {
                 </Grid.Column>
                 <Grid.Column style={{ float: 'right', width: '30%' }}>
                 <Container style={{marginLeft:'50px'}}>                      
-                <Header as='h2' color='black' textAlign='center'>                 
+                <Header as='h2' color='blue' textAlign='center'>                 
                         Thêm ứng cử viên
                        </Header>
-                       <Card style={{width: '100%'}}>      
+                       <Card style={{width: '125%'}}>      
                        
-                       <Form.Group size='large'style={{marginLeft: '15%',marginRight: '15%'}} >                       
+                       <Form.Group size='large'style={{marginLeft: '5%',marginRight: '5%',color: 'rgb(98, 126, 234)',}} >                       
                        <br/>
+                       <p style={{fontSize:'15px'}}>Họ và tên:</p>
                        <Form.Input
-                        fluid
-                        label='Họ và tên:'
+                        fluid                                         
+                        style={{fontSize:'15px'}}
                         placeholder='Nhập họ và tên của ứng viên'
                         onChange={event => this.setState({ cand_name: event.target.value })}
                         textAlign='center'
                        
-                    />        
+                    />     
                         
                         <p>Hình ảnh:</p>
                        
@@ -278,17 +279,18 @@ class VotingList extends Component {
                             onChange={this.captureFile}
                             style={{ maxWidth: '0.1px', maxHeight: '0.1px', zIndex: '-1', overflow: 'hidden', position: 'absolute' }} 
                           />
-                          <label for="embedpollfileinput" class="ui huge blue right floated button" style={{ fontSize: '15px', marginRight: '30%' }}>
+                          <label for="embedpollfileinput" class="ui huge blue right floated button" style={{ fontSize: '15px', marginRight: '30%' }} >
                             <i class="ui upload icon"></i>
                             Thêm hình ảnh
                           </label>
                         </div><br /><br /><br />
-                        <p>Mô tả sơ lược:</p>
+                        <p style={{fontSize:'15px'}}>Mô tả sơ lược:</p>
                         <Form.Input as='TextArea'
                          fluid
+                         required
                          label='Description:'                         
                          placeholder='Nhập mô tả sơ lược về ứng viên'
-                         style={{width: '100%'}}
+                         style={{width: '100%', height: '50%', fontSize:'15px'}}
                          centered={true}
                          onChange={event => this.setState({ cand_desc: event.target.value })}
                           />
@@ -296,10 +298,11 @@ class VotingList extends Component {
                        <p>E-mail: </p>
                        <Form.Input fluid
                          id="email"
+                         style={{fontSize:'15px'}}
                          placeholder="Nhập địa chỉ e-mail"
                        />
                        <br/>
-                       <Button primary onClick={this.onSubmit} loading={this.state.loading} style={{Bottom: '10px',marginBottom: '10px'}}>Đăng ký</Button>
+                       <Button primary onClick={this.onSubmit} loading={this.state.loading} style={{Bottom: '10px',marginBottom: '20px'}}>Đăng ký</Button>
                         </Form.Group>                                  
                       </Card> 
                     </Container>

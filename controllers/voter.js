@@ -11,7 +11,7 @@ const saltRounds = 10;
 module.exports = {
 	create: function (req, res, cb) {
 		VoterModel.findOne(
-			{ email: req.body.email, election_address: req.body.election_address },
+			{ email: req.body.email,id_number: req.body.id_number,phone: req.body.phone, election_address: req.body.election_address },
 			function (err, result) {
 				if (err) {
 					cb(err);
@@ -21,6 +21,10 @@ module.exports = {
 							{
 								email: req.body.email,
 								password: req.body.email,
+								name: req.body.name,
+								phone: req.body.phone,
+								id_number: req.body.id_number,
+								home_address: req.body.home_address,
 								election_address: req.body.election_address,
 							},
 							function (err, voter) {
@@ -53,11 +57,22 @@ module.exports = {
 
 										html:
 											req.body.election_description +
+											'<br>Họ và tên:' +
+											voter.name +
 											'<br>Tên đăng nhập:' +
 											voter.email +
 											'<br>' +
 											'Mật khẩu:' +
 											voter.password +
+											'<br>' +
+											'Địa chỉ thường trú:' +
+											voter.home_address +
+											'<br>' +
+											'Số điện thoại:' +
+											voter.phone +
+											'<br>' +
+											'Chứng minh nhân dân:' +
+											voter.id_number +
 											'<br><a href="http://localhost:3000/homepage">Click vào link để chuyển hướng đến website </a>', // plain text body
 									};
 
@@ -84,7 +99,7 @@ module.exports = {
 							}
 						);
 					} else {
-						res.json({ status: 'error', message: 'Voter already exists ', data: null });
+						res.json({ status: 'error', message: 'Thông tin cử tri đã tồn tại, vui lòng đăng kí với thông tin khác ', data: null });
 					}
 				}
 			}
@@ -165,17 +180,28 @@ module.exports = {
 								to: voterInfo.email, // list of receivers
 								subject: req.body.election_name, // Subject line
 								html:
-									req.body.election_description +
-									'<br>Tên đăng nhập:' +
-									voterInfo.email +
-									'<br>' +
-									'Mật khẩu:' +
-									voterInfo.password +
-									'<br><a href="url">Click vào link để chuyển hướng đến website</a>', // plain text body
+								req.body.election_description +
+								'<br>Họ và tên:' +
+								voter.name +
+								'<br>Tên đăng nhập:' +
+								voter.email +
+								'<br>' +
+								'Mật khẩu:' +
+								voter.password +
+								'<br>' +
+								'Địa chỉ thường trú:' +
+								voter.home_address +
+								'<br>' +
+								'Số điện thoại:' +
+								voter.phone +
+								'<br>' +
+								'Chứng minh nhân dân:' +
+								voter.id_number +
+								'<br><a href="http://localhost:3000/homepage">Click vào link để chuyển hướng đến website </a>', // plain text body
 							};
 							transporter.sendMail(mailOptions, function (err, info) {
 								if (err) {
-									res.json({ status: 'error', message: 'Voter could not be added', data: null });
+									res.json({ status: 'error', message: 'Có lỗi xảy ra, gửi gmail thất bại', data: null });
 									console.log(err);
 								} else {
 									console.log(info);

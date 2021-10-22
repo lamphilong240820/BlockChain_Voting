@@ -169,12 +169,12 @@ class VotingList extends Component {
     SidebarExampleVisible = () => (
       <Sidebar.Pushable>
         <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin' style={{ backgroundColor: 'white', borderWidth: "10px" }}>
-        <Menu.Item as='a' style={{ color: 'grey' }} >
+        <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }} >
         <h2>MENU</h2><hr/>
         </Menu.Item>      
         <Link route={`/election/${Cookies.get('address')}/company_dashboard`}>
         <a>
-          <Menu.Item style={{ color: '#8B4513', fontColor: 'grey' }}>
+          <Menu.Item style={{ color: 'rgb(98, 126, 234)', fontColor: 'grey' }}>
             <Icon name='dashboard'/>
             Trang chủ
           </Menu.Item>
@@ -182,7 +182,7 @@ class VotingList extends Component {
           </Link>
           <Link route={`/election/${Cookies.get('address')}/candidate_list`}>
           <a>
-          <Menu.Item as='a' style={{ color: '#8B4513' }}>
+          <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
             <Icon name='user outline' />
             Danh sách ứng viên
           </Menu.Item>
@@ -190,7 +190,7 @@ class VotingList extends Component {
           </Link>
           <Link route={`/election/${Cookies.get('address')}/voting_list`}>
           <a>
-          <Menu.Item as='a' style={{ color: '#8B4513' }}>
+          <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
             <Icon name='list' />
             Danh sách cử tri
           </Menu.Item>
@@ -198,7 +198,7 @@ class VotingList extends Component {
           </Link>
           <hr/>
           <Button onClick={this.signOut} style={{backgroundColor: 'white'}}>
-          <Menu.Item as='a' style={{ color: '#8B4513' }}>
+          <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
             <Icon name='sign out' />
             Đăng xuất
           </Menu.Item>       
@@ -220,10 +220,21 @@ class VotingList extends Component {
 
 
 		const email = document.getElementById('register_voter_email').value;
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const id_number = document.getElementById('id_number').value;
+    const home_address = document.getElementById('home_address').value;
+    // // alert(name);
+    // alert(phone);
+    // // alert(home_address);
+    // alert(id_number);
+
+
     
+
 		var http = new XMLHttpRequest();
         var url = "/voter/register";
-        var params = "email=" + email+"&election_address=" + this.state.election_address+ "&election_name=" + this.state.election_name + "&election_description=" + this.state.election_description;
+        var params = "email=" + email+ "&name=" + name+"&phone=" + phone+"&home_address=" + home_address+"&id_number=" + id_number+"&election_address=" + this.state.election_address+ "&election_name=" + this.state.election_name + "&election_description=" + this.state.election_description;
         http.open("POST", url, true);
         //Send the proper header information along with the request
         http.setRequestHeader(
@@ -249,7 +260,7 @@ class VotingList extends Component {
     }
 	}
 	
-  render() {      
+  render(){      
     return (
       <div>
           <Helmet>
@@ -266,7 +277,7 @@ class VotingList extends Component {
               <br />
               <Grid.Column width={14} style={{ minHeight: '630px' }}>
                 <Grid.Column style={{ float: 'left', width: '60%' }}>
-                  <Header as='h2' color='black'>
+                  <Header as='h2' color='blue'>
                   Danh sách cử tri
               </Header>
                   <Container>                      
@@ -277,18 +288,51 @@ class VotingList extends Component {
                 </Grid.Column>
                 <Grid.Column style={{ float: 'right', width: '30%' }}>
                   <Container style={{}}>
-                    <Header as='h2' color='black'>
+                    <Header as='h2' color='blue'>
                       Thêm cử tri
                        </Header>
                     <Card style={{ width: '100%' }}>
                       <br/>
-                      <Form.Group size='large' style={{ marginLeft: '15%', marginRight: '15%' }} >
+                      <Form.Group size='large' style={{marginLeft: '5%',marginRight: '5%',color: 'rgb(98, 126, 234)',}} >
+                      <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='name'
+                          label='Họ và tên:'
+                          placeholder='Nhập họ và tên cử tri'
+                          textAlign='center'
+                        />
                         <Form.Input
 						style={{marginTop: '10px'}}
                           fluid
                           id='register_voter_email'
                           label='Email:'
                           placeholder='Nhập địa chỉ e-mail'
+                          textAlign='center'
+                        />
+                         
+                        <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='home_address' 
+                          label='Địa chỉ thường trú:'
+                          placeholder='Nhập địa chỉ thường trú của cử tri'
+                          textAlign='center'
+                        />
+                        <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='phone'                          
+                          label='Số điện thoại:'
+                          placeholder='Nhập số điện thoại của cử tri'
+                          textAlign='center'
+                        />
+                        <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='id_number' 
+                          label='Chứng minh nhân dân:'
+                          placeholder='Nhập CMND của cử tri'
                           textAlign='center'
                         />
 

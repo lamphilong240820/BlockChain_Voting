@@ -25,17 +25,17 @@ class VotingList extends Component {
     SidebarExampleVisible = () => (
   
       <Sidebar.Pushable>
-        <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin' style={{ backgroundColor: 'white', borderWidth: "10px" }}>
-        <Menu.Item as='a' style={{ color: 'grey' }} >
+        <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin' style={{ backgroundColor: 'white', borderWidth: "10px" , color: 'rgb(98, 126, 234)' }}>
+        <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }} >
         <h2>MENU</h2><hr/>
         </Menu.Item>
-          <Menu.Item as='a' style={{ color: 'grey' }} >
+          <Menu.Item as='a' style={{  color: 'rgb(98, 126, 234)' }} >
             <Icon name='dashboard' />
             Trang chủ
             </Menu.Item>
           <hr/>
           <Button onClick={this.signOut} style={{backgroundColor: 'white'}}>
-          <Menu.Item as='a' style={{ color: 'grey' }}>
+          <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
             <Icon name='sign out' />
             Đăng xuất
           </Menu.Item>
@@ -116,7 +116,7 @@ class VotingList extends Component {
         } = this.state;
     
         return (
-          <div style={{marginLeft: '45%',marginBottom: '2%',marginTop: '2%'}}>
+          <div style={{marginLeft: '30%',marginBottom: '2%',marginTop: '2%'}}>
             <Header as="h2">
               <Icon name="address card" />
               <Header.Content>

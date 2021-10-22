@@ -12,6 +12,22 @@ const VoterSchema = new Schema ({
         type: String,
         required: true
     },
+    name: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    id_number: {
+        type: String,
+        required: true,
+    },
+    home_address: {
+        type: String,
+        required: true,
+    },
     election_address: {
         type: String,
         required: true
