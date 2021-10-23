@@ -12,7 +12,7 @@ class VotingList extends Component {
         election_name: '',
         election_description: '',
         emailArr: [],
-        idArr: [],
+        idArr: [],               
         item: [],
     }
 
@@ -22,7 +22,11 @@ class VotingList extends Component {
         var params = 'election_address='+this.state.election_address;
         http.open("POST", url, true);
         let email=[];
-        let id=[]
+        let id=[];
+        let name=[];
+        let phone=[];
+        let id_number=[];
+        let home_address=[];
         //Send the proper header information along with the request
         http.setRequestHeader(
             "Content-type",
@@ -36,6 +40,10 @@ class VotingList extends Component {
                   for (let voter of responseObj.data.voters) {
                         email.push(voter.email);
                         id.push(voter.id);    
+                        name.push(voter.name); 
+                        phone.push(voter.phone); 
+                        id_number.push(voter.id_number); 
+                        home_address.push(voter.home_address); 
                   } 
                 }                
             }
@@ -43,6 +51,8 @@ class VotingList extends Component {
         http.send(params);
         this.state.emailArr.push(email);
         this.state.idArr.push(id);
+       
+
 
         try {
             const add = Cookies.get('address');
@@ -62,16 +72,17 @@ class VotingList extends Component {
         ea = this.state.emailArr[0];
         let ia = [];
         ia = this.state.idArr[0];            
+               
         
         let i=-1;
         const items = ia.map(ia => {
             i++;
             return {
               header: email[i],
-              description: (
-                <div>                
-                  <br />
-                  
+              meta:'Họ và tên: '+ name[i],
+              description:'CMND: '+id_number[i]+'---Địa chỉ: '+home_address[i],
+              extra: (
+                <div>       
                   <Modal size={"tiny"} trigger={
                       <Button basic id={ia} color="green">                        
                         Edit
@@ -184,7 +195,7 @@ class VotingList extends Component {
           <a>
           <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
             <Icon name='user outline' />
-            Danh sách ứng viên
+            Ứng cử viên
           </Menu.Item>
           </a>
           </Link>
@@ -192,7 +203,7 @@ class VotingList extends Component {
           <a>
           <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
             <Icon name='list' />
-            Danh sách cử tri
+            Cử tri
           </Menu.Item>
           </a>
           </Link>

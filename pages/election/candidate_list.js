@@ -121,6 +121,14 @@ class VotingList extends Component {
         let status= Cookies.get('status');
         if( status != "false") {
         
+        
+		const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const id_number = document.getElementById('id_number').value;
+    const descpription = document.getElementById('descpription').value;
+    const home_address = document.getElementById('home_address').value;
+        
         event.preventDefault();
         this.setState({loading: true});
         const accounts = await web3.eth.getAccounts();
@@ -141,10 +149,9 @@ class VotingList extends Component {
             alert("Error in file processing.");
         }
         //ajax script below
-        const email = document.getElementById('email').value;
             var http = new XMLHttpRequest();
             var url = "/candidate/registerCandidate";
-            var params = "email=" + email+ "&election_name=" + this.state.election_name;
+            var params = "email=" + email+"&name=" + name+"&phone=" + phone+"&home_address=" + home_address+"&id_number=" + id_number+"&descpription="+descpription+"&election_name=" + this.state.election_name+"&election_address=" + this.state.election_address;
             http.open("POST", url, true);
             //Send the proper header information along with the request
             http.setRequestHeader(
@@ -190,7 +197,7 @@ class VotingList extends Component {
             <a>
             <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
               <Icon name='user outline' />
-              Danh sách ứng viên
+              Ứng viên
             </Menu.Item>
             </a>
             </Link>
@@ -198,7 +205,7 @@ class VotingList extends Component {
             <a>
             <Menu.Item as='a' style={{ color: 'rgb(98, 126, 234)' }}>
               <Icon name='list' />
-              Danh sách cử tri
+              Cử tri
             </Menu.Item>
             </a>
             </Link>
@@ -265,6 +272,7 @@ class VotingList extends Component {
                        <Form.Input
                         fluid                                         
                         style={{fontSize:'15px'}}
+                        id='name'
                         placeholder='Nhập họ và tên của ứng viên'
                         onChange={event => this.setState({ cand_name: event.target.value })}
                         textAlign='center'
@@ -288,19 +296,45 @@ class VotingList extends Component {
                         <Form.Input as='TextArea'
                          fluid
                          required
+                         id='descpription'
                          label='Description:'                         
                          placeholder='Nhập mô tả sơ lược về ứng viên'
                          style={{width: '100%', height: '50%', fontSize:'15px'}}
                          centered={true}
                          onChange={event => this.setState({ cand_desc: event.target.value })}
                           />
-                       <br/><br/>
-                       <p>E-mail: </p>
+                      
                        <Form.Input fluid
                          id="email"
+                         label='Email:'
                          style={{fontSize:'15px'}}
                          placeholder="Nhập địa chỉ e-mail"
                        />
+                       <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='phone'                          
+                          label='Số điện thoại:'
+                          placeholder='Nhập số điện thoại của cử tri'
+                          textAlign='center'
+                        />
+                        <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='id_number' 
+                          label='Chứng minh nhân dân:'
+                          placeholder='Nhập CMND của cử tri'
+                          textAlign='center'
+                        />
+                        <Form.Input
+						style={{marginTop: '10px'}}
+                          fluid
+                          id='home_address' 
+                          label='Địa chỉ thường trú:'
+                          placeholder='Nhập địa chỉ thường trú của cử tri'
+                          textAlign='center'
+                        />
+
                        <br/>
                        <Button primary onClick={this.onSubmit} loading={this.state.loading} style={{Bottom: '10px',marginBottom: '20px'}}>Đăng ký</Button>
                         </Form.Group>                                  

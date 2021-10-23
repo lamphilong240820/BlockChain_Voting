@@ -130,7 +130,7 @@ module.exports = {
 		VoterModel.find({ election_address: req.body.election_address }, function (err, voters) {
 			if (err) cb(err);
 			else {
-				for (let voter of voters) voterList.push({ id: voter._id, email: voter.email });
+				for (let voter of voters) voterList.push({ id: voter._id, email: voter.email,name: voter.name,phone: voter.phone,id_number: voter.id_number,home_address: voter.home_address, });
 
 				count = voterList.length;
 

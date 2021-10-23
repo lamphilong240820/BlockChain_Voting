@@ -154,7 +154,7 @@ class ContainerExampleContainer extends Component {
 					<a>
 						<Menu.Item as="a" style={{ color: 'rgb(98, 126, 234)' }}>
 							<Icon name="user outline" />
-							Danh sách ứng viên
+							Ứng viên
 						</Menu.Item>
 					</a>
 				</Link>
@@ -162,7 +162,7 @@ class ContainerExampleContainer extends Component {
 					<a>
 						<Menu.Item as="a" style={{ color: 'rgb(98, 126, 234)' }}>
 							<Icon name="list" />
-							Danh sách cử tri
+							Cử tri
 						</Menu.Item>
 					</a>
 				</Link>
