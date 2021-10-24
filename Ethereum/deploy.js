@@ -4,8 +4,8 @@ const Web3 = require('web3');
 const eF = require('./Build/ElectionFact.json');
 
 const provider = new HDWalletProvider(
-	'soda primary wheel try parrot such unfair swarm obvious collect tobacco blouse',
-	'https://rinkeby.infura.io/v3/29bcae4ee7454a118a2b0f0f4d86c0e0'
+	'8986db7bd25014000202ecdce226333614a031bb78143eac8b8a50fe5e0e885b',
+	'https://rinkeby.infura.io/v3/ab2b770d38e942ea99d1ef137bd644bd'
 );
 const web3 = new Web3(provider);
 
