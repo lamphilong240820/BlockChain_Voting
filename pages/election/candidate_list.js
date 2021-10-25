@@ -51,6 +51,10 @@ class VotingList extends Component {
         const items = candidates.map(candidate => {
             i++;
             let temp=candidate[4];
+            const divStyle = {
+              color: 'blue',
+            };
+            
 
             return {
               header: candidate[0],
@@ -59,10 +63,14 @@ class VotingList extends Component {
                   <Image id={i} src={`https://ipfs.io/ipfs/${candidate[2]}`} style={{maxWidth: '100%',maxHeight:'190px'}}/>
                 ),
               extra: (
-                  <div>
-                    <Icon name='pie graph' iconPostion='left'/>  
-                    {candidate[3].toString()}  
+                <>
+                  <div style={divStyle}>
+                    <Icon name='pie graph' iconPostion='left'/> Số phiếu: {' '} {candidate[3].toString()}  
                   </div>
+                  <div style={divStyle}>
+                    Địa chỉ thường trú:{' '}{' '} {candidate[6].toString()}  
+                  </div>
+                </>
               ) 
             };
             
@@ -140,7 +148,7 @@ class VotingList extends Component {
             const add = Cookies.get('address');
             const election = Election(add);
 
-            election.methods.addCandidate(this.state.cand_name,this.state.cand_desc,this.state.ipfsHash,document.getElementById('email').value).send({
+            election.methods.addCandidate(this.state.cand_name,this.state.cand_desc,this.state.ipfsHash,document.getElementById('email').value,id_number,home_address).send({
                 from: accounts[0]}, (error, transactionHash) => {}
             );       
         })

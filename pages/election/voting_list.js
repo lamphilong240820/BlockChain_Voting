@@ -77,10 +77,30 @@ class VotingList extends Component {
         let i=-1;
         const items = ia.map(ia => {
             i++;
+            const divStyle = {
+              color: 'SlateGray',
+            };
+            
             return {
               header: email[i],
-              meta:'Họ và tên: '+ name[i],
-              description:'CMND: '+id_number[i]+'---Địa chỉ: '+home_address[i],
+              meta:(
+              <div style={divStyle}>
+                <br/>
+                Họ và tên: {name[i].toString()},
+              </div>),
+              description:
+              (
+                <>
+                <br/>
+                  <div style={divStyle}>
+                    <Icon name='pie graph' iconPostion='left'/> CMND: {' '} {id_number[i].toString()}  
+                  </div>
+                  <br/>
+                  <div style={divStyle}>
+                    Địa chỉ thường trú:{' '}{' '} {home_address[i].toString()}  
+                  </div>
+                </>
+              ),              
               extra: (
                 <div>       
                   <Modal size={"tiny"} trigger={

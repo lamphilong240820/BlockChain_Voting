@@ -56,6 +56,8 @@ contract Election {
         string imgHash;
         uint8 voteCount;
         string email;
+        string card_number;
+        string home_address;
     }
 
     //candidate mapping
@@ -83,17 +85,16 @@ contract Election {
 
     //function to add candidate to mapping
 
-    function addCandidate(string memory candidate_name, string memory candidate_description, string memory imgHash,string memory email) public owner {
+    function addCandidate(string memory candidate_name, string memory candidate_description, string memory imgHash,string memory email, string memory card_number,string memory home_address) public owner {
         uint8 candidateID = numCandidates++; //assign id of the candidate
-        candidates[candidateID] = Candidate(candidate_name,candidate_description,imgHash,0,email); //add the values to the mapping
-        // console.log('Candidate ne: ',candidates);
+        candidates[candidateID] = Candidate(candidate_name,candidate_description,imgHash,0,email,card_number,home_address); //add the values to the mapping        
     }
     //function to vote and check for double voting
 
     function vote(uint8 candidateID,string e) public {
 
         //if false the vote will be registered
-        require(!voters[e].voted, "Error:You cannot double vote");
+        require(!voters[e].voted, "Có lỗi xảy ra, bạn chỉ được phép bỏ phiếu 1 lần");
         
         voters[e] = Voter (candidateID,true); //add the values to the mapping
         numVoters++;
@@ -115,8 +116,8 @@ contract Election {
 
     //function to get candidate information
 
-    function getCandidate(uint8 candidateID) public view returns (string memory, string memory, string memory, uint8,string memory) {
-        return (candidates[candidateID].candidate_name, candidates[candidateID].candidate_description, candidates[candidateID].imgHash, candidates[candidateID].voteCount, candidates[candidateID].email);
+    function getCandidate(uint8 candidateID) public view returns (string memory, string memory, string memory, uint8,string memory,string memory, string memory) {
+        return (candidates[candidateID].candidate_name, candidates[candidateID].candidate_description, candidates[candidateID].imgHash, candidates[candidateID].voteCount, candidates[candidateID].email,candidates[candidateID].card_number,candidates[candidateID].home_address);
     } 
 
     //function to return winner candidate information
