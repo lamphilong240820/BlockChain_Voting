@@ -78,7 +78,7 @@ class VotingList extends Component {
         const items = ia.map(ia => {
             i++;
             const divStyle = {
-              color: 'SlateGray',
+              color: 'DarkSlateGray	',
             };
             
             return {
@@ -86,18 +86,18 @@ class VotingList extends Component {
               meta:(
               <div style={divStyle}>
                 <br/>
-                Họ và tên: {name[i].toString()},
+                <Icon name='user circle' iconPostion='left'/> Họ và tên: {name[i].toString()}
               </div>),
               description:
               (
                 <>
                 <br/>
                   <div style={divStyle}>
-                    <Icon name='pie graph' iconPostion='left'/> CMND: {' '} {id_number[i].toString()}  
+                  <Icon name='address card outline' iconPostion='left'/>CMND: {' '} {id_number[i].toString()}  
                   </div>
                   <br/>
                   <div style={divStyle}>
-                    Địa chỉ thường trú:{' '}{' '} {home_address[i].toString()}  
+                  <Icon name='home' iconPostion='left'/> Địa chỉ thường trú:{' '}{' '} {home_address[i].toString()}  
                   </div>
                 </>
               ),              
@@ -329,6 +329,7 @@ class VotingList extends Component {
 						style={{marginTop: '10px'}}
                           fluid
                           id='name'
+                        icon='user circle'
                           label='Họ và tên:'
                           placeholder='Nhập họ và tên cử tri'
                           textAlign='center'
@@ -337,6 +338,7 @@ class VotingList extends Component {
 						style={{marginTop: '10px'}}
                           fluid
                           id='register_voter_email'
+                         icon='envelope'                          
                           label='Email:'
                           placeholder='Nhập địa chỉ e-mail'
                           textAlign='center'
@@ -346,6 +348,7 @@ class VotingList extends Component {
 						style={{marginTop: '10px'}}
                           fluid
                           id='home_address' 
+                          icon="home" 
                           label='Địa chỉ thường trú:'
                           placeholder='Nhập địa chỉ thường trú của cử tri'
                           textAlign='center'
@@ -353,7 +356,8 @@ class VotingList extends Component {
                         <Form.Input
 						style={{marginTop: '10px'}}
                           fluid
-                          id='phone'                          
+                          id='phone' 
+                          icon="phone" 
                           label='Số điện thoại:'
                           placeholder='Nhập số điện thoại của cử tri'
                           textAlign='center'
@@ -361,7 +365,8 @@ class VotingList extends Component {
                         <Form.Input
 						style={{marginTop: '10px'}}
                           fluid
-                          id='id_number' 
+                          id='id_number'
+                         icon='address card outline'
                           label='Chứng minh nhân dân:'
                           placeholder='Nhập CMND của cử tri'
                           textAlign='center'

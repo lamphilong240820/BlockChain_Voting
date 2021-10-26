@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Button, Header, Icon, Image, Menu, Sidebar, Container, Card } from 'semantic-ui-react';
-import Layout from '../../components/Layout'; 
+import Layout from '../../components/Layout_voter'; 
 import web3 from '../../Ethereum/web3';
 import Election from '../../Ethereum/election';
 import Cookies from 'js-cookie';
@@ -79,25 +79,46 @@ class VotingList extends Component {
       // alert(candidates[1]);
 
       const items = candidates.map(candidate => {
-          i++;
-          let temp=candidate[4];
+        i++;
+        let temp=candidate[4];
+        const divStyle1 = {
+          color: 'DarkSlateGray	',
+        };
+        const divStyle2 = {
+          color: 'blue	',
+        };
+        
 
-          return {
-            header: candidate[0],
-            description: candidate[1],
-            image: (
-                <Image id={i} src={`https://ipfs.io/ipfs/${candidate[2]}`} style={{maxWidth: '100%',maxHeight:'190px'}}/>
-              ),
-            extra: (
-                <div>
-                  <Icon name='pie graph' iconPostion='left'/>  
-                  {candidate[3].toString()}  
-                  <Button id={i} style={{float: 'right'}} onClick={this.vote} primary>Vote!</Button>
-                </div>
-            ) 
-          };
-          
-      });
+        return {
+          header:(
+            <div>
+              <Icon name='user circle' iconPostion='left'/> Tên: {candidate[0].toString()}
+            </div>
+          ),
+          description: (
+            <>
+            <div>
+              <Icon name='file archive' iconPostion='left'/> Mô tả sơ lược: {candidate[1].toString()}
+            </div>
+            <div style={divStyle1}>
+              <Icon name='home' iconPostion='left'/>Địa chỉ thường trú:{' '}{' '} {candidate[6].toString()}  
+            </div>
+           
+            
+          </>
+          ),              
+          image: (
+              <Image id={i} src={`https://ipfs.io/ipfs/${candidate[2]}`} style={{maxWidth: '100%',maxHeight:'190px'}}/>
+            ),
+          extra:(
+            <div style={divStyle2}>
+            <Icon name='inbox' iconPostion='left'/> Số phiếu bầu: {' '} {candidate[3].toString()}  
+            <Button id={i} style={{float: 'right'}} onClick={this.vote} primary>Vote!</Button>
+          </div>
+          )              
+        };
+        
+    });
 
 
       this.setState({item: items}); 
@@ -118,7 +139,7 @@ class VotingList extends Component {
         return (
           <div style={{marginLeft: '30%',marginBottom: '2%',marginTop: '2%'}}>
             <Header as="h2">
-              <Icon name="address card" />
+              <Icon name="university" />
               <Header.Content>
                 {election_name}
                 <Header.Subheader>{election_description}</Header.Subheader>
@@ -155,7 +176,10 @@ class VotingList extends Component {
               </Grid.Column>
               <Layout>                                   
               {this.getElectionDetails()}
-              <Grid.Column style={{minHeight: '77vh',marginLeft: '10%'}}>
+              <Grid.Column style={{minHeight: '77vh',marginLeft: '2%'}}>
+              <Header as='h2' color= 'blue'>
+                  Danh sách ứng viên
+              </Header>
               <Container>
                        {this.renderTable()}
                     </Container>

@@ -11,7 +11,7 @@ const saltRounds = 10;
 module.exports = {
 	create: function (req, res, cb) {
 		VoterModel.findOne(
-			{ email: req.body.email,id_number: req.body.id_number,phone: req.body.phone, election_address: req.body.election_address },
+			{id_number: req.body.id_number, election_address: req.body.election_address },
 			function (err, result) {
 				if (err) {
 					cb(err);
@@ -57,23 +57,23 @@ module.exports = {
 
 										html:
 											req.body.election_description +
-											'<br>Họ và tên:' +
+											'<br>Họ và tên:  ' +
 											voter.name +
-											'<br>Tên đăng nhập:' +
+											'<br>Tên đăng nhập:  ' +
 											voter.email +
 											'<br>' +
-											'Mật khẩu:' +
+											'Mật khẩu:  ' +
 											voter.password +
 											'<br>' +
-											'Địa chỉ thường trú:' +
+											'Địa chỉ thường trú:  ' +
 											voter.home_address +
 											'<br>' +
-											'Số điện thoại:' +
+											'Số điện thoại:  ' +
 											voter.phone +
 											'<br>' +
-											'Chứng minh nhân dân:' +
+											'Chứng minh nhân dân:  ' +
 											voter.id_number +
-											'<br><a href="http://localhost:3000/homepage">Click vào link để chuyển hướng đến website </a>', // plain text body
+											'<br><a href="http://localhost:3000/voter_login">Click vào link để chuyển hướng đến website </a>', // plain text body
 									};
 
 									transporter.sendMail(mailOptions, function (err, info) {
@@ -197,7 +197,7 @@ module.exports = {
 								'<br>' +
 								'Chứng minh nhân dân:' +
 								voter.id_number +
-								'<br><a href="http://localhost:3000/homepage">Click vào link để chuyển hướng đến website </a>', // plain text body
+								'<br><a href="http://localhost:3000/voter_login">Click vào link để chuyển hướng đến website </a>', // plain text body
 							};
 							transporter.sendMail(mailOptions, function (err, info) {
 								if (err) {

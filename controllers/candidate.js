@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 module.exports = {
 	register: function (req, res, cb) {
 		CandidateModal.findOne(
-			{ email: req.body.email,id_number: req.body.id_number,phone: req.body.phone, election_address: req.body.election_address },
+			{id_number: req.body.id_number, election_address: req.body.election_address },
 			function (err, result) {
 				if (err) {
 					cb(err);
@@ -49,21 +49,21 @@ module.exports = {
 
 										html:
 											'Xin chúc mừng bạn đã trở thành một ứng cử viên cho cuộc bầu cử  ' + req.body.election_name + ' .'+
-											"Thông tin của bạn:"+											
-											'<br>Họ và tên:' +											
+											"Thông tin của bạn: "+											
+											'<br>Họ và tên:  ' +											
 											candidate.name +
-											'<br>Mô tả sơ lược:' +
+											'<br>Mô tả sơ lược:  ' +
 											candidate.descpription +
-											'<br>Email:' +
+											'<br>Email:  ' +
 											candidate.email +							
 											'<br>' +
-											'Địa chỉ thường trú:' +
+											'Địa chỉ thường trú:  ' +
 											candidate.home_address +
 											'<br>' +
-											'Số điện thoại:' +
+											'Số điện thoại:  ' +
 											candidate.phone +
 											'<br>' +
-											'Chứng minh nhân dân:' +
+											'Chứng minh nhân dân:  ' +
 											candidate.id_number,
 									};
 

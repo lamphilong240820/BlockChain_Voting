@@ -51,27 +51,40 @@ class VotingList extends Component {
         const items = candidates.map(candidate => {
             i++;
             let temp=candidate[4];
-            const divStyle = {
-              color: 'blue',
+            const divStyle1 = {
+              color: 'DarkSlateGray	',
+            };
+            const divStyle2 = {
+              color: 'blue	',
             };
             
 
             return {
-              header: candidate[0],
-              description: candidate[1],
+              header:(
+                <div>
+                  <Icon name='user circle' iconPostion='left'/> Tên: {candidate[0].toString()}
+                </div>
+              ),
+              description: (
+                <>
+                <div>
+                  <Icon name='file archive' iconPostion='left'/> Mô tả sơ lược: {candidate[1].toString()}
+                </div>
+                <div style={divStyle1}>
+                  <Icon name='home' iconPostion='left'/>Địa chỉ thường trú:{' '}{' '} {candidate[6].toString()}  
+                </div>
+               
+                
+              </>
+              ),              
               image: (
                   <Image id={i} src={`https://ipfs.io/ipfs/${candidate[2]}`} style={{maxWidth: '100%',maxHeight:'190px'}}/>
                 ),
-              extra: (
-                <>
-                  <div style={divStyle}>
-                    <Icon name='pie graph' iconPostion='left'/> Số phiếu: {' '} {candidate[3].toString()}  
-                  </div>
-                  <div style={divStyle}>
-                    Địa chỉ thường trú:{' '}{' '} {candidate[6].toString()}  
-                  </div>
-                </>
-              ) 
+              extra:(
+                <div style={divStyle2}>
+                <Icon name='inbox' iconPostion='left'/> Số phiếu bầu: {' '} {candidate[3].toString()}  
+              </div>
+              )              
             };
             
         });
@@ -95,7 +108,7 @@ class VotingList extends Component {
         return (
           <div style={{marginLeft: '30%',marginBottom: '2%',marginTop: '2%'}}>
             <Header as="h2">
-              <Icon name="address card" />
+              <Icon name="university" />
               <Header.Content>
                 {election_name}
                 <Header.Subheader>{election_description}</Header.Subheader>
@@ -140,46 +153,47 @@ class VotingList extends Component {
         event.preventDefault();
         this.setState({loading: true});
         const accounts = await web3.eth.getAccounts();
-        
-        try {
-        await ipfs.add(this.state.buffer, (err, ipfsHash) => {
-            this.setState({ ipfsHash: ipfsHash[0].hash });
-                    
-            const add = Cookies.get('address');
-            const election = Election(add);
+         //ajax script below
+         var http = new XMLHttpRequest();
+         var url = "/candidate/registerCandidate";
+         var params = "email=" + email+"&name=" + name+"&phone=" + phone+"&home_address=" + home_address+"&id_number=" + id_number+"&descpription="+descpription+"&election_name=" + this.state.election_name+"&election_address=" + this.state.election_address;
+         http.open("POST", url, true);
+         //Send the proper header information along with the request
+         http.setRequestHeader(
+             "Content-type",
+             "application/x-www-form-urlencoded"
+         );
+         http.onreadystatechange = async () => {
+             //Call a function when the state changes.
+             if (http.readyState == 4 && http.status == 200) {
+                 var responseObj = JSON.parse(http.responseText);
+                 if(responseObj.status=="success") {
+                   alert(responseObj.message);
+                   try {
+                     await ipfs.add(this.state.buffer, (err, ipfsHash) => {
+                        this.setState({ ipfsHash: ipfsHash[0].hash });
+                                
+                        const add = Cookies.get('address');
+                        const election = Election(add);
+            
+                        election.methods.addCandidate(this.state.cand_name,this.state.cand_desc,this.state.ipfsHash,document.getElementById('email').value,id_number,home_address).send({
+                            from: accounts[0]}, (error, transactionHash) => {}
+                        );       
+                    })
+                        alert("Thêm thông tin ứng cử viên thành công!");
+                    } catch (err) {
+                        alert("Bạn hãy thêm một hình ảnh đại diện cho ứng viên");
+                    }
+                 }
+                 else {
+                   alert(responseObj.message);
 
-            election.methods.addCandidate(this.state.cand_name,this.state.cand_desc,this.state.ipfsHash,document.getElementById('email').value,id_number,home_address).send({
-                from: accounts[0]}, (error, transactionHash) => {}
-            );       
-        })
-            alert("Thêm thông tin ứng cử viên thành công!");
-        } catch (err) {
-            alert("Error in file processing.");
-        }
-        //ajax script below
-            var http = new XMLHttpRequest();
-            var url = "/candidate/registerCandidate";
-            var params = "email=" + email+"&name=" + name+"&phone=" + phone+"&home_address=" + home_address+"&id_number=" + id_number+"&descpription="+descpription+"&election_name=" + this.state.election_name+"&election_address=" + this.state.election_address;
-            http.open("POST", url, true);
-            //Send the proper header information along with the request
-            http.setRequestHeader(
-                "Content-type",
-                "application/x-www-form-urlencoded"
-            );
-            http.onreadystatechange = function() {
-                //Call a function when the state changes.
-                if (http.readyState == 4 && http.status == 200) {
-                    var responseObj = JSON.parse(http.responseText);
-                    if(responseObj.status=="success") {
-                      alert(responseObj.message);
-                    }
-                    else {
-                      alert(responseObj.message);
-                    }
-                }
-            };
-            http.send(params);
-            this.setState({loading: false});
+                 }
+             }
+         };
+         http.send(params);
+         this.setState({loading: false});      
+       
           }
           else{
             alert("Cuộc bầu cử đã kết thúc, không thể thêm thông tin ứng viên mới ");
@@ -278,9 +292,11 @@ class VotingList extends Component {
                        <br/>
                        <p style={{fontSize:'15px'}}>Họ và tên:</p>
                        <Form.Input
-                        fluid                                         
+                        fluid  
+                        required                                       
                         style={{fontSize:'15px'}}
                         id='name'
+                        icon='user circle'
                         placeholder='Nhập họ và tên của ứng viên'
                         onChange={event => this.setState({ cand_name: event.target.value })}
                         textAlign='center'
@@ -300,20 +316,22 @@ class VotingList extends Component {
                             Thêm hình ảnh
                           </label>
                         </div><br /><br /><br />
+                       
                         <p style={{fontSize:'15px'}}>Mô tả sơ lược:</p>
                         <Form.Input as='TextArea'
                          fluid
                          required
+                         icon="file"
                          id='descpription'
-                         label='Description:'                         
+                         label='Description:'
                          placeholder='Nhập mô tả sơ lược về ứng viên'
                          style={{width: '100%', height: '50%', fontSize:'15px'}}
                          centered={true}
                          onChange={event => this.setState({ cand_desc: event.target.value })}
                           />
-                      
                        <Form.Input fluid
                          id="email"
+                         icon='envelope'
                          label='Email:'
                          style={{fontSize:'15px'}}
                          placeholder="Nhập địa chỉ e-mail"
@@ -321,7 +339,8 @@ class VotingList extends Component {
                        <Form.Input
 						style={{marginTop: '10px'}}
                           fluid
-                          id='phone'                          
+                          id='phone'  
+                         icon='phone'
                           label='Số điện thoại:'
                           placeholder='Nhập số điện thoại của cử tri'
                           textAlign='center'
@@ -330,6 +349,7 @@ class VotingList extends Component {
 						style={{marginTop: '10px'}}
                           fluid
                           id='id_number' 
+                         icon='address card outline'
                           label='Chứng minh nhân dân:'
                           placeholder='Nhập CMND của cử tri'
                           textAlign='center'
@@ -337,7 +357,9 @@ class VotingList extends Component {
                         <Form.Input
 						style={{marginTop: '10px'}}
                           fluid
-                          id='home_address' 
+                          required
+                          id='home_address'
+                          icon="home" 
                           label='Địa chỉ thường trú:'
                           placeholder='Nhập địa chỉ thường trú của cử tri'
                           textAlign='center'

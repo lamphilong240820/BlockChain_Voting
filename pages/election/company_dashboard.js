@@ -115,7 +115,7 @@ class ContainerExampleContainer extends Component {
 		return (
 			<div style={{ marginLeft: '30%', marginBottom: '2%', marginTop: '2%', float: 'left' }}>
 				<Header as="h2">
-					<Icon name="address card" />
+					<Icon name="university" />
 					<Header.Content>
 						{election_name}
 						<Header.Subheader>{election_desc}</Header.Subheader>

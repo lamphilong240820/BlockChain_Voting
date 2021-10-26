@@ -19,7 +19,7 @@ export default props => {
 				<Menu.Menu position="right">
 					<Menu.Item style={{ color: 'rgb(98, 126, 234)',paddingRight: '1px' }}>
 					<Menu.Item icon="user" />
-						Xin chào {Cookies.get('company_email') || Cookies.get('voter_email')}
+						Xin chào {Cookies.get('voter_email')}
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>
