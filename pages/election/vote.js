@@ -4,8 +4,8 @@ import Layout from '../../components/Layout_voter';
 import web3 from '../../Ethereum/web3';
 import Election from '../../Ethereum/election';
 import Cookies from 'js-cookie';
-import {Router} from '../../routes';
 import {Helmet} from 'react-helmet';
+import {Link,Router} from '../../routes';
 
 class VotingList extends Component {
 
@@ -157,9 +157,37 @@ class VotingList extends Component {
         const e = parseInt(event.currentTarget.id,10);
         const accounts = await web3.eth.getAccounts();
         const add = Cookies.get('address');
+        const voter_email = Cookies.get('voter_email');
         const election = Election(add);
-        await election.methods.vote(e,Cookies.get('voter_email')).send({from: accounts[0]});
-        alert("Bỏ phiếu thành công!")
+        
+        //ajax script below
+        var http = new XMLHttpRequest();
+        var url = "/voter/castVote";
+        var params = "email=" + voter_email +"&election_address=" + this.state.election_address;
+        http.open("POST", url, true);
+        //Send the proper header information along with the request
+        http.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+        );
+        http.onreadystatechange = async () => {
+            //Call a function when the state changes.
+            if (http.readyState == 4 && http.status == 200) {
+                var responseObj = JSON.parse(http.responseText);
+                if(responseObj.status=="success") {
+                  // alert(responseObj.message);
+                  try{
+                    await election.methods.vote(e,responseObj.data.id).send({from: accounts[0]});      
+                  }catch (err) {
+                }                              
+                }
+                else {
+                  alert(responseObj.message);
+
+                }
+            }
+        };
+        http.send(params);
     }
   
     render() {

@@ -7,4 +7,6 @@ router.post('/', voterController.getAll);
 router.put('/:voterId', voterController.updateById);
 router.delete('/:voterId', voterController.deleteById);
 router.post('/resultMail', voterController.resultMail);
+router.post('/castVote', voterController.castVote);
+
 module.exports = router;

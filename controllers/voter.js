@@ -307,4 +307,21 @@ module.exports = {
 			}
 		});
 	},
+	castVote: function (req, res, cb) {
+		VoterModel.findOne({ email: req.body.email, election_address: req.body.election_address}, function (err, voterInfo) {
+			if (err) cb(err);
+			else {
+				if (voterInfo)
+					res.json({
+						status: 'success',
+						message: 'voter found!!!',
+						data: { id: voterInfo._id, election_address: voterInfo.election_address },
+					});
+				//res.sendFile(path.join(__dirname+'/index.html'));
+				else {
+					res.json({ status: 'error', message: 'Có lỗi xảy ra, vui lòng đăng nhập và thử lại!!!', data: null });
+				}
+			}
+		});
+	},
 };
