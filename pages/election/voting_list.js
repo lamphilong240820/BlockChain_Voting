@@ -242,7 +242,7 @@ class VotingList extends Component {
         Cookies.remove('company_email');
         Cookies.remove('company_id');
         alert("Đang đăng xuất.");
-        Router.pushRoute('/company_login');
+        Router.pushRoute('/homepage');
     }
 
     register = event => {

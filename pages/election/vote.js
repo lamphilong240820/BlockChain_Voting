@@ -46,9 +46,9 @@ class VotingList extends Component {
 
     signOut() {
           Cookies.remove('address');
-          Cookies.remove('voter_email');
+          Cookies.remove('voter_email');          
           alert("Đang đăng xuất");
-          Router.pushRoute('/homepage');
+          Router.pushRoute('/voter_login');
     }
 
     async componentDidMount() {
@@ -127,7 +127,7 @@ class VotingList extends Component {
       } catch(err) {
           // console.log(err.message);
           alert("Đang chuyển hướng về trang đăng nhập...");
-          // // Router.pushRoute('/company_login');
+          Router.pushRoute('/voter_login');
       }
   }
     getElectionDetails = () => {

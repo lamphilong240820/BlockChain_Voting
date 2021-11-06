@@ -96,7 +96,7 @@ class VotingList extends Component {
         } catch(err) {
             // console.log(err.message);
             alert("Đang chuyển hướng về trang đăng nhập...");
-            // // Router.pushRoute('/company_login');
+            Router.pushRoute('/company_login');
         }
     }
     getElectionDetails = () => {

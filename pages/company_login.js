@@ -20,8 +20,8 @@ class DividerExampleVerticalForm extends Component {
     <div className='login-form'>
     <style JSX>{`
         .login-form {
-            width:100vw;
-            height:100vh;
+            width:100%;
+            height:100%;
             position:absolute; 
             background: url('../../static/blockchain.jpg') no-repeat;
             z-index: -1;
