@@ -94,7 +94,7 @@ contract Election {
     function vote(uint8 candidateID,string e) public {
 
         //if false the vote will be registered
-        require(!voters[e].voted, "Có lỗi xảy ra, bạn chỉ được phép bỏ phiếu 1 lần");
+        require(!voters[e].voted, "Error:You cannot double vote");
         
         voters[e] = Voter (candidateID,true); //add the values to the mapping
         numVoters++;
