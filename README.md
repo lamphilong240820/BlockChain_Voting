@@ -22,7 +22,6 @@ Cài đặt tiện ích MetaMask trên Chrome (https://metamask.io/download.html
 - Đảm bảo cài đặt Node.js v11.14.0 để đảm bảo ứng dụng chạy tốt. Việc kiểm tra các phiên bản nút khác vẫn chưa được thực hiện.
 - MongoDB phải hoạt động ở chế độ nền trên localhost: 27017
 
-###### Hãy gắn dấu sao repo nếu dự án này giúp bạn theo bất kỳ cách nào!
 
 ## Các công nghệ sử dụng:
 
